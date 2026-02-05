@@ -1,0 +1,43 @@
+<div class="list-wrapper">
+
+  <h2>Customers</h2>
+
+  <p class="loading" *ngIf="loading">Loading customers...</p>
+
+  <div class="table-wrapper" *ngIf="!loading && customers.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Account No</th>
+          <th>Name</th>
+          <th>Monthly Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of customers">
+          <td>{{ c.accountNo }}</td>
+          <td>{{ c.name }}</td>
+          <td>₹{{ c.monthlyAmount }}</td>
+          <td class="actions">
+            <button class="btn view" (click)="viewCustomer(c.id)">
+              View
+            </button>
+            <button class="btn edit" (click)="editCustomer(c.id)">
+              Edit
+            </button>
+            <button class="btn delete" (click)="deleteCustomer(c.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="empty" *ngIf="!loading && customers.length === 0">
+    No customers found.
+  </p>
+
+</div>

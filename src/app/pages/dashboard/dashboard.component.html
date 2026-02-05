@@ -1,0 +1,159 @@
+<div class="dashboard">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="app-info">
+        <h1>{{ appName }}</h1>
+        <p>RD Collection Management System</p>
+      </div>
+      <div class="date-display">
+        <div class="date-icon">📅</div>
+        <div class="date-text">{{ getCurrentDate() | date:'fullDate' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Month Selector -->
+  <div class="month-section">
+    <div class="month-selector">
+      <label class="month-label">
+        <span class="label-icon">📆</span>
+        Select Month
+      </label>
+      <div class="month-input-group">
+        <input
+          type="month"
+          [(ngModel)]="selectedMonth"
+          (change)="loadSummary()"
+          class="month-input"
+        />
+        <button class="today-btn" (click)="selectCurrentMonth()">
+          Today
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading summary...</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-section" *ngIf="summary && !loading">
+    <div class="summary-cards">
+      <div class="summary-card expected">
+        <div class="card-icon">💰</div>
+        <div class="card-content">
+          <h4>Total Expected</h4>
+          <p class="amount">₹ {{ summary.totalExpected | number:'1.0-0' }}</p>
+          <p class="card-subtext">Monthly collection target</p>
+        </div>
+        <div class="card-badge" *ngIf="getCollectionPercentage() < 100">
+          {{ getCollectionPercentage() | number:'1.0-0' }}%
+        </div>
+      </div>
+
+      <div class="summary-card collected">
+        <div class="card-icon">✅</div>
+        <div class="card-content">
+          <h4>Amount Collected</h4>
+          <p class="amount">₹ {{ summary.totalCollected | number:'1.0-0' }}</p>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="getCollectionPercentage()"></div>
+            </div>
+            <span class="progress-text">{{ getCollectionPercentage() | number:'1.0-0' }}% collected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card pending">
+        <div class="card-icon">⏳</div>
+        <div class="card-content">
+          <h4>Pending Amount</h4>
+          <p class="amount">₹ {{ summary.totalPending | number:'1.0-0' }}</p>
+          <!-- <p class="card-subtext">{{ getPendingCount() }} customers pending</p> -->
+        </div>
+        <!-- <div class="pending-badge" *ngIf="summary.totalPending > 0">
+          {{ getPendingCount() }}
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Cards -->
+  <div class="actions-section">
+    <h2 class="section-title">Quick Actions</h2>
+    <div class="action-grid">
+      <div class="action-card add-card" (click)="goToAddCustomer()">
+        <div class="action-icon">➕</div>
+        <div class="action-content">
+          <h3>Add New Customer</h3>
+          <p>Create RD account with details</p>
+        </div>
+        <div class="action-arrow">→</div>
+      </div>
+
+      <div class="action-card view-card" (click)="goToCustomerList()">
+        <div class="action-icon">👥</div>
+        <div class="action-content">
+          <h3>View All Customers</h3>
+          <p>Browse and manage database</p>
+        </div>
+        <div class="action-arrow">→</div>
+      </div>
+
+      <div class="action-card pending-card" routerLink="/customers/pending">
+        <div class="action-icon">⚠️</div>
+        <div class="action-content">
+          <h3>Pending Payments</h3>
+          <p>View overdue RD amounts</p>
+        </div>
+        <!-- <div class="pending-count" *ngIf="getPendingCount() > 0">
+          {{ getPendingCount() }}
+        </div> -->
+        <div class="action-arrow">→</div>
+      </div>
+
+      <div class="action-card paid-card" routerLink="/customers/paid">
+        <div class="action-icon">📄</div>
+        <div class="action-content">
+          <h3>Paid Customers</h3>
+          <p>Monthly collection report</p>
+        </div>
+        <div class="action-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats
+  <div class="stats-section" *ngIf="summary">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon success">✓</div>
+        <div class="stat-details">
+          <span class="stat-value">{{ getPaidCount() }}</span>
+          <span class="stat-label">Paid Customers</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon pending">!</div>
+        <div class="stat-details">
+          <span class="stat-value">{{ getPendingCount() }}</span>
+          <span class="stat-label">Pending</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon total">Σ</div>
+        <div class="stat-details">
+          <span class="stat-value">{{ getTotalCustomers() }}</span>
+          <span class="stat-label">Total Customers</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>

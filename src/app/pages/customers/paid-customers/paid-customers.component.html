@@ -1,0 +1,50 @@
+<div class="paid-wrapper">
+
+  <h2>Paid Customers</h2>
+  <p class="subtitle">Month-wise RD payment list</p>
+
+  <div class="top-bar">
+    <input
+      type="month"
+      [(ngModel)]="selectedMonth"
+      (change)="loadPaidCustomers()" />
+
+    <button class="pdf-btn" (click)="downloadPdf()">
+      📄 Download PDF
+    </button>
+  </div>
+
+  <p *ngIf="loading" class="loading">Loading...</p>
+
+  <table *ngIf="!loading && paidCustomers.length > 0">
+    <thead>
+      <tr>
+        <th>Account No</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Mode</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of paidCustomers">
+        <td>{{ c.accountNo }}</td>
+        <td>{{ c.name }}</td>
+        <td>₹{{ c.amountPaid }}</td>
+        <td>
+          <span
+            class="mode"
+            [class.cash]="c.paymentMode === 'CASH'"
+            [class.online]="c.paymentMode === 'ONLINE'">
+            {{ c.paymentMode }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && paidCustomers.length === 0" class="empty">
+    No payments found for this month.
+  </p>
+
+</div>

@@ -1,0 +1,101 @@
+.list-wrapper {
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #eef2f7, #f8fafc);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Table wrapper for mobile */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+th {
+  background-color: #f1f5f9;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  padding: 12px;
+  text-align: center;
+}
+
+td {
+  font-size: 13px;
+  padding: 12px;
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Button colors */
+.btn.view {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn.edit {
+  background-color: #f59e0b;
+  color: #ffffff;
+}
+
+.btn.delete {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  th, td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,60 @@
+<div class="form-wrapper">
+
+  <div class="form-card">
+    <h2>{{ editMode ? 'Edit Customer' : 'Add Customer' }}</h2>
+    <p class="subtitle">
+      {{ editMode ? 'Update customer RD details' : 'Enter customer RD details' }}
+    </p>
+
+    <form [formGroup]="customerForm" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label>Account Number</label>
+        <input
+          type="number"
+          formControlName="accountNo"
+          [readonly]="editMode"
+          placeholder="Enter account number">
+      </div>
+
+      <div class="form-group">
+        <label>Customer Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Enter customer name">
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input
+          type="text"
+          formControlName="mobile"
+          placeholder="Enter mobile number">
+      </div>
+
+      <div class="form-group">
+        <label>Opening Date</label>
+        <input
+          type="date"
+          formControlName="openingDate">
+      </div>
+
+      <div class="form-group">
+        <label>Monthly Amount</label>
+        <input
+          type="number"
+          formControlName="monthlyAmount"
+          placeholder="e.g. 500 / 1000">
+      </div>
+
+      <button type="submit" class="submit-btn">
+        {{ editMode ? 'Update Customer' : 'Save Customer' }}
+      </button>
+
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    </form>
+  </div>
+
+</div>

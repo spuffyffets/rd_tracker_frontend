@@ -1,0 +1,83 @@
+<div class="detail-wrapper" *ngIf="customer">
+
+  <!-- Header -->
+  <div class="top-bar">
+    <button class="back-btn" (click)="goBack()">← Back</button>
+    <h2>Customer Details</h2>
+  </div>
+
+  <!-- Customer Info Card -->
+  <div class="info-card">
+    <div class="info-row">
+      <span>Account No</span>
+      <strong>{{ customer.accountNo }}</strong>
+    </div>
+    <div class="info-row">
+      <span>Name</span>
+      <strong>{{ customer.name }}</strong>
+    </div>
+    <div class="info-row">
+      <span>Mobile</span>
+      <strong>{{ customer.mobile }}</strong>
+    </div>
+    <div class="info-row">
+      <span>Opening Date</span>
+      <strong>{{ customer.openingDate }}</strong>
+    </div>
+    <div class="info-row highlight">
+      <span>Monthly Amount</span>
+      <strong>₹{{ customer.monthlyAmount }}</strong>
+    </div>
+  </div>
+
+  <!-- Payment History -->
+  <div class="history-section">
+    <h3>Payment History</h3>
+
+    <p class="loading" *ngIf="loading">Loading payments...</p>
+
+    <div class="table-wrapper" *ngIf="!loading && payments.length > 0">
+      <table>
+        <thead>
+         <tr>
+  <th>Month</th>
+  <th>Amount</th>
+  <th>Mode</th>
+  <th>Date</th>
+  <th>Actions</th> 
+</tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of payments">
+  <td>{{ p.paymentMonth }}</td>
+  <td>₹{{ p.amountPaid }}</td>
+  <td>{{ p.paymentMode }}</td>
+  <td>{{ p.paymentDate | date:'dd MMM yyyy' }}</td>
+
+  <!-- ✅ NEW ACTIONS -->
+  <td class="actions">
+    <button class="btn edit" (click)="editPayment(p)">
+      Edit
+    </button>
+    <button class="btn delete" (click)="deletePayment(p.id)">
+      Delete
+    </button>
+  </td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <p class="empty" *ngIf="!loading && payments.length === 0">
+      No payments recorded yet.
+    </p>
+  </div>
+
+  <!-- Action -->
+  <button class="add-payment-btn" (click)="goToAddPayment()">
+    Add Payment
+  </button>
+
+</div>

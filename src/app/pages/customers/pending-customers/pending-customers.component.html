@@ -1,0 +1,66 @@
+<div class="pending-wrapper">
+
+  <div class="header">
+    <h2>Pending Payments</h2>
+    <p>Select a month to view unpaid RD collections</p>
+  </div>
+
+  <!-- Month Selector -->
+  <div class="filter-bar">
+    <label for="monthSelect">Month</label>
+    <select
+      id="monthSelect"
+      [(ngModel)]="selectedMonth"
+      (change)="loadPending()">
+
+      <option *ngFor="let m of months" [value]="m.value">
+        {{ m.label }}
+      </option>
+
+    </select>
+  </div>
+
+  <!-- Loading -->
+  <p class="loading" *ngIf="loading">Loading pending customers...</p>
+
+  <!-- No Data -->
+  <div class="empty" *ngIf="!loading && pendingCustomers.length === 0">
+    No pending payments for this month.
+  </div>
+
+  <!-- Pending Table -->
+  <div class="table-wrapper" *ngIf="!loading && pendingCustomers.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Account No</th>
+          <th>Name</th>
+          <th>Monthly Amount</th>
+          <th>Pending</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of pendingCustomers">
+          <td>{{ c.accountNo }}</td>
+          <td>{{ c.name }}</td>
+          <td>₹{{ c.monthlyAmount }}</td>
+          <td>
+            <span class="pending-info">
+              Since {{ c.pendingSince }}
+              <br>
+              <small>{{ c.pendingCount }} month(s)</small>
+            </span>
+          </td>
+          <td>
+            <button class="pay-btn" (click)="addPayment(c.customerId)">
+              Add Payment
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
