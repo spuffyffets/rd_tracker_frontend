@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { PendingCustomer } from '../models/pending-customer.model';
 import { Payment } from '../models/payment.model';
 import { DashboardSummary } from '../models/DashboardSummary.model';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
